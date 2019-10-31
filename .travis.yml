@@ -1,6 +1,7 @@
 dist: xenial
 services:
   - postgresql
+  - redis-server
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq build-essential gettext python-dev zlib1g-dev libpq-dev xvfb
@@ -15,3 +16,10 @@ install:
   - pip install -r requirements/local.txt
 script:
   - "pytest"
+env:
+  global:
+    - DATABASE_URL="postgres://postgres@localhost:5432/kaschingo"
+    - CELERY_BROKER_URL=redis://localhost:6379/0
+    - BRAINTREE_MERCHANT_ID="123"
+    - BRAINTREE_PUBLIC_KEY="123"
+    - BRAINTREE_PRIVATE_KEY="123"
