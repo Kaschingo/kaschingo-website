@@ -1,8 +1,6 @@
 from django.conf import settings
 from django.urls import include, re_path, path
 from django.conf.urls.static import static
-from django.contrib import admin
-from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
 from wagtail.admin import urls as wagtailadmin_urls
@@ -12,18 +10,12 @@ from puput import urls as puput_urls
 from longclaw import urls as longclaw_urls
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path(
-        "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
-    ),
-    # Django Admin, use {% url 'admin:index' %}
-    # path(settings.ADMIN_URL, admin.site.urls),
     # Wagtail
     re_path(r"^admin/", include(wagtailadmin_urls)),
     re_path(r"^documents/", include(wagtaildocs_urls)),
     re_path(r"^shop/", include(longclaw_urls)),
-    re_path(r"^pages/", include(puput_urls)),
-    re_path(r"^pages/", include(wagtail_urls)),
+    re_path(r"^", include(puput_urls)),
+    re_path(r"^", include(wagtail_urls)),
     # User management
     path("users/", include("kaschingo.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
