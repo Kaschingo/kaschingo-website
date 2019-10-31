@@ -9,6 +9,7 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.core import urls as wagtail_urls
 from puput import urls as puput_urls
+from longclaw import urls as longclaw_urls
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
@@ -16,10 +17,11 @@ urlpatterns = [
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
     # Django Admin, use {% url 'admin:index' %}
-    path(settings.ADMIN_URL, admin.site.urls),
+    # path(settings.ADMIN_URL, admin.site.urls),
     # Wagtail
-    re_path(r"^cms/", include(wagtailadmin_urls)),
+    re_path(r"^admin/", include(wagtailadmin_urls)),
     re_path(r"^documents/", include(wagtaildocs_urls)),
+    re_path(r"^shop/", include(longclaw_urls)),
     re_path(r"^pages/", include(puput_urls)),
     re_path(r"^pages/", include(wagtail_urls)),
     # User management

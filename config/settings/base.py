@@ -115,7 +115,14 @@ LOCAL_APPS = [
     "kaschingo.wagtail.home",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + WAGTAIL_APPS + PUPUT_APPS + LONGCLAW_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = (
+    DJANGO_APPS
+    + WAGTAIL_APPS
+    + PUPUT_APPS
+    + LONGCLAW_APPS
+    + THIRD_PARTY_APPS
+    + LOCAL_APPS
+)
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
@@ -339,9 +346,15 @@ PUPUT_AS_PLUGIN = True
 
 # The payment gateway to use. `BasePayment` is a dummy payment gateway for testing.
 # Longclaw also offers 'BraintreePayment', 'PaypalVZeroPayment' and 'StripePayment'
-PAYMENT_GATEWAY = "longclaw.checkout.gateways.BasePayment"
+PAYMENT_GATEWAY = "longclaw.checkout.gateways.braintree.BraintreePayment"
 
 PRODUCT_VARIANT_MODEL = "catalog.ProductVariant"
+
+# braintree mechant account
+BRAINTREE_SANDBOX = env.bool("BRAINTREE_SANDBOX_MODE", True)
+BRAINTREE_MERCHANT_ID = env("BRAINTREE_MERCHANT_ID")
+BRAINTREE_PUBLIC_KEY = env("BRAINTREE_PUBLIC_KEY")
+BRAINTREE_PRIVATE_KEY = env("BRAINTREE_PRIVATE_KEY")
 
 # Your stuff...
 # ------------------------------------------------------------------------------
