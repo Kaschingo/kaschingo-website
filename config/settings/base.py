@@ -78,6 +78,11 @@ WAGTAIL_APPS = [
     "wagtail.core",
     "modelcluster",
     "taggit",
+    "wagtail.contrib.sitemaps",
+    "wagtail.contrib.routable_page",
+    "django_social_share",
+    "puput",
+    "colorful",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -309,6 +314,7 @@ STATICFILES_FINDERS += ["compressor.finders.CompressorFinder"]
 # Wagtail
 # ------------------------------------------------------------------------------
 WAGTAIL_SITE_NAME = "Kaschingo"
+PUPUT_AS_PLUGIN = True
 
 # Your stuff...
 # ------------------------------------------------------------------------------

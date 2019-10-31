@@ -24,3 +24,4 @@ coreapi==2.3.3  # https://github.com/core-api/python-client
 
 # Django REST Framework
 wagtail==2.6.3  # https://github.com/wagtail/wagtail
+puput==1.0.5  # https://github.com/APSL/puput
