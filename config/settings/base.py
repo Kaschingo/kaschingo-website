@@ -76,13 +76,28 @@ WAGTAIL_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail.core",
+    "wagtail.contrib.modeladmin",
+    "wagtail.contrib.settings",
+    "wagtail.api.v2",
     "modelcluster",
     "taggit",
+]
+PUPUT_APPS = [
     "wagtail.contrib.sitemaps",
     "wagtail.contrib.routable_page",
     "django_social_share",
     "puput",
     "colorful",
+]
+LONGCLAW_APPS = [
+    "longclaw.core",
+    "longclaw.configuration",
+    "longclaw.shipping",
+    "longclaw.products",
+    "longclaw.orders",
+    "longclaw.checkout",
+    "longclaw.basket",
+    "longclaw.stats",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -95,10 +110,12 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "kaschingo.users.apps.UsersConfig",
-    # Your stuff: custom apps go here
+    "kaschingo.wagtail.catalog",
+    "kaschingo.wagtail.search",
+    "kaschingo.wagtail.home",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + WAGTAIL_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + WAGTAIL_APPS + PUPUT_APPS + LONGCLAW_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
@@ -203,6 +220,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "kaschingo.utils.context_processors.settings_context",
+                "longclaw.configuration.context_processors.currency",
             ],
         },
     }
@@ -315,6 +333,15 @@ STATICFILES_FINDERS += ["compressor.finders.CompressorFinder"]
 # ------------------------------------------------------------------------------
 WAGTAIL_SITE_NAME = "Kaschingo"
 PUPUT_AS_PLUGIN = True
+
+# Longclaw
+# ------------------------------------------------------------------------------
+
+# The payment gateway to use. `BasePayment` is a dummy payment gateway for testing.
+# Longclaw also offers 'BraintreePayment', 'PaypalVZeroPayment' and 'StripePayment'
+PAYMENT_GATEWAY = "longclaw.checkout.gateways.BasePayment"
+
+PRODUCT_VARIANT_MODEL = "catalog.ProductVariant"
 
 # Your stuff...
 # ------------------------------------------------------------------------------
